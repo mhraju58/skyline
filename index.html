@@ -34,7 +34,7 @@
                 <div class="col-md-4">
                     <div class="deposit status">
                         <h5>Deposit</h5>
-                        <h2>$ <span id="current-amount">00</span></h2>
+                        <h2>$ <span id="deposit-balance">00</span></h2>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -46,7 +46,7 @@
                 <div class="col-md-4">
                     <div class="balance status">
                         <h5>Balance</h5>
-                        <h2>$1240</h2>
+                        <h2>$<span id="main-balance">1240</span></h2>
                     </div>
                 </div>
             </div>
@@ -85,11 +85,18 @@
         btnDeposit.addEventListener("click", function(){
             const depositAmount= document.getElementById("deposit-amount").value;
             const depositNumber= parseFloat(depositAmount);
-            const currentAmount= document.getElementById("current-amount").innerText;
-            const currentAmountNumber= parseFloat(currentAmount);
-            const totalDepositAmount= depositNumber+currentAmountNumber;
-            document.getElementById("current-amount").innerText= totalDepositAmount;
+            updateSpanText("deposit-balance", depositNumber);
+            updateSpanText("main-balance", depositNumber);
+            document.getElementById("deposit-amount").value="";
         })
+        
+            function updateSpanText(id, depositNumber){
+            const current= document.getElementById(id).innerText;
+            const currentBalance= parseFloat(current);
+            const totalAmount= depositNumber+currentBalance;
+            document.getElementById(id).innerText= totalAmount;
+            }
+        
 
     </script>
     
